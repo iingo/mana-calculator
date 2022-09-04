@@ -1,3 +1,7 @@
+body {
+  background-color: white;
+}
+
 div.cost {
   width: 30%;
   display: inline-block;
@@ -79,4 +83,9 @@ table.mana td {
 
 table.mana tr {
   width:100%;
+}
+
+table.mana {
+  display: inline-block;
+  margin-right: 5%;
 }
