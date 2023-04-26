@@ -1,16 +1,16 @@
 body {
   background-color: white;
 }
-
+ 
 div.cost {
   width: 30%;
   display: inline-block;
 }
-
+ 
 input {
   width: 50%;
 }
-
+ 
 input.submitbutton {
   width:auto;
   height: 100%;
@@ -18,74 +18,79 @@ input.submitbutton {
   margin-left: -5%;
   padding: 1%;
 }
-
+ 
 table.fancy td, table.fancy th, table.fancy {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 10px;
   text-align: center;
 }
-
+ 
 .flex-container {
   display:flex;
 }
-
+ 
 div {
   margin-right: 5%;
 }
-
+ 
 @keyframes expand {
   0% {height: 0px;}
   100% {height: 100%;}
 }
-
+ 
 @keyframes collapse {
   0% {height: 100%;}
   100% {height: 0%;}
 }
-
+ 
 #exp #expandtable {
   max-height: 0;
   transition: max-height 0.15s ease-out;
   overflow: hidden;
   background: #d5d5d5;
 }
-
+ 
 div.align {
   width: 100%;
 }
-
-
+ 
+ 
 td.top {
   float: left;
 }
-
+ 
 .output {
   text-align: center;
 }
-
+ 
 div.credits {
   font-size: 60%;
   float: right;
   position:fixed;
   bottom:0;
 }
-
+ 
 td.ergebnis {
   border-top: 2px solid black;
   border-bottom: 5px double black;
 }
-
+ 
 table.mana td {
   margin-right: 20%;
   margin-left: 20%;
 }
-
+ 
 table.mana tr {
   width:100%;
 }
-
+ 
 table.mana {
   display: inline-block;
   margin-right: 5%;
+}
+ 
+button.clear {
+  position:absolute;
+  right:5%;
 }
