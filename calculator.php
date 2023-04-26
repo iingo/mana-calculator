@@ -9,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-
+ 
 <form name="form" action="" method="get">
   <div class="flex-container">
     <div>
@@ -134,7 +134,7 @@
             </div>
         </tr>
       </table>
-
+ 
       <br>
     </div>
   <!-- </div> -->
@@ -142,12 +142,15 @@
   <input class="submitbutton" type="submit" name="submitbutton" value="Calculate">
 </form>
 </div><br>
-
+ 
 <br>
+<a href="https://wynnmana.de.cool"><button class="clear" type="button" name="clear">Clear</button></a>
+<br>
+ 
 <span class="output">
-
+ 
 <?php
-
+ 
 // Radiance
 $radiancecost1 = 0;
 $radiancecost2 = 0;
@@ -160,46 +163,58 @@ if ($_GET["radiance"] == "checked") {
   $basecost3 = $three/(1+$costredpct3/100)-$costredraw3;
   $basecost4 = $four/(1+$costredpct4/100)-$costredraw4;
   if ($costredraw1 < 0 and $costredpct1 < 0) {
-    $radiancecost1 = ($basecost1 + $costredraw1*1.2)*(1+($costredpct1*1.2)/100);
+    $radiancecost1 = ($basecost1 + floor($costredraw1*1.2))*(1+($costredpct1*1.2)/100);
   } elseif ($costredraw1 < 0) {
-    $radiancecost1 = ($basecost1 + $costredraw1*1.2)*(1+$costredpct1/100);
+    $radiancecost1 = ($basecost1 + floor($costredraw1*1.2))*(1+$costredpct1/100);
   } elseif ($costredpct1 < 0) {
     $radiancecost1 = ($basecost1 + $costredraw1)*(1+($costredpct1*1.2)/100);
   } else {
     $radiancecost1 = $one;
   }
   if ($costredraw2 < 0 and $costredpct2 < 0) {
-    $radiancecost2 = ($basecost2 + $costredraw2*1.2)*(1+($costredpct2*1.2)/100);
+    $radiancecost2 = ($basecost2 + floor($costredraw2*1.2))*(1+($costredpct2*1.2)/100);
   } elseif ($costredraw2 < 0) {
-    $radiancecost2 = ($basecost2 + $costredraw2*1.2)*(1+$costredpct2/100);
+    $radiancecost2 = ($basecost2 + floor($costredraw2*1.2))*(1+$costredpct2/100);
   } elseif ($costredpct2 < 0) {
     $radiancecost2 = ($basecost2 + $costredraw2)*(1+($costredpct2*1.2)/100);
   } else {
     $radiancecost2 = $two;
   }
   if ($costredraw3 < 0 and $costredpct3 < 0) {
-    $radiancecost3 = ($basecost3 + $costredraw3*1.2)*(1+($costredpct3*1.2)/100);
+    $radiancecost3 = ($basecost3 + floor($costredraw3*1.2))*(1+($costredpct3*1.2)/100);
   } elseif ($costredraw3 < 0) {
-    $radiancecost3 = ($basecost3 + $costredraw3*1.2)*(1+$costredpct3/100);
+    $radiancecost3 = ($basecost3 + floor($costredraw3*1.2))*(1+$costredpct3/100);
   } elseif ($costredpct3 < 0) {
     $radiancecost3 = ($basecost3 + $costredraw3)*(1+($costredpct3*1.2)/100);
   } else {
     $radiancecost3 = $three;
   }
   if ($costredraw4 < 0 and $costredpct4 < 0) {
-    $radiancecost4 = ($basecost4 + $costredraw4*1.2)*(1+($costredpct4*1.2)/100);
-  } elseif ($costredraw1 < 0) {
-    $radiancecost4 = ($basecost4 + $costredraw4*1.2)*(1+$costredpct4/100);
-  } elseif ($costredpct1 < 0) {
+    $radiancecost4 = ($basecost4 + floor($costredraw4*1.2))*(1+($costredpct4*1.2)/100);
+  } elseif ($costredraw4 < 0) {
+    $radiancecost4 = ($basecost4 + floor($costredraw4*1.2))*(1+$costredpct4/100);
+  } elseif ($costredpct4 < 0) {
     $radiancecost4 = ($basecost4 + $costredraw4)*(1+($costredpct4*1.2)/100);
   } else {
     $radiancecost4 = $four;
+  }
+  if ($radiancecost1 < 1) {
+    $radiancecost1 = 1;
+  }
+  if ($radiancecost2 < 1) {
+    $radiancecost2 = 1;
+  }
+  if ($radiancecost3 < 1) {
+    $radiancecost3 = 1;
+  }
+  if ($radiancecost4 < 1) {
+    $radiancecost4 = 1;
   }
   // echo $radiancecost1."<br>".$radiancecost2."<br>".$radiancecost3."<br>".$radiancecost4."<br>";
 } else {
   $radiance = 0;
 }
-
+ 
 // Cycle zu Spell umschreiben
 $cyclen = 1; // Cycle length
 if ($cycle1 == 1) {
@@ -304,13 +319,13 @@ if ($cycle4 != 0) {
     $cycle5 = 0;
     $radcycle5 = 0;
   }
-
-
-
+ 
+ 
+ 
 // Spellcycle ausrechnen
 $cyclecost = 0; // Gesamtkosten des Cycles
 $radcyclecost = 0; // Selbes mit Radiance
-
+ 
 if ($cyclen == 2) {
   $cyclecost = $cycle1 + $cycle2;
   if ($radiance) {
@@ -334,9 +349,9 @@ if ($cyclen == 2) {
   if ($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"] and $_GET["cycle1"] == $_GET["cycle4"]) {
     echo "Invalid spell cycle input. Has to contain at least 2 different spells.<br>";
   } elseif (($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"]) or ($_GET["cycle2"] == $_GET["cycle3"] and $_GET["cycle2"] == $_GET["cycle4"])) {
-    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + 10; // 3x gleich, 1x anders
+    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + 15; // 3x gleich, 1x anders
     if ($radiance) {
-      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + 10;
+      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + 15;
     }
   } elseif (($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle3"] == $_GET["cycle4"]) or ($_GET["cycle1"] == $_GET["cycle4"] and $_GET["cycle2"] == $_GET["cycle3"])) {
     $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + 10; // 2x gleich, 2x anders
@@ -358,19 +373,19 @@ if ($cyclen == 2) {
   if ($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"] and $_GET["cycle1"] == $_GET["cycle4"] and $_GET["cycle1"] == $_GET["cycle5"]) {
     echo "Invalid spell cycle input. Has to contain at least 2 different spells.<br>";
   } elseif (($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"] and $_GET["cycle1"] == $_GET["cycle4"]) or ($_GET["cycle5"] == $_GET["cycle2"] and $_GET["cycle5"] == $_GET["cycle3"] and $_GET["cycle5"] == $_GET["cycle4"])) {
-    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 15; // 4x gleich, 1x anders
+    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 30; // 4x gleich, 1x anders
     if ($radiance) {
-      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 15;
+      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 30;
     }
   } elseif (($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"] and $_GET["cycle4"] == $_GET["cycle5"]) or ($_GET["cycle5"] == $_GET["cycle4"] and $_GET["cycle5"] == $_GET["cycle3"] and $_GET["cycle1"] == $_GET["cycle2"])) {
-    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 15; // 3x gleich, 2x anders
+    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 20; // 3x gleich, 2x anders
     if ($radiance) {
-      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 15;
+      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 20;
     }
   } elseif (($_GET["cycle1"] == $_GET["cycle2"] and $_GET["cycle1"] == $_GET["cycle3"]) or ($_GET["cycle2"] == $_GET["cycle3"] and $_GET["cycle2"] == $_GET["cycle4"]) or ($_GET["cycle3"] == $_GET["cycle4"] and $_GET["cycle3"] == $_GET["cycle5"]) or ($_GET["cycle2"] == $_GET["cycle3"] and $_GET["cycle2"] == $_GET["cycle4"]) or ($_GET["cycle4"] == $_GET["cycle5"] and $_GET["cycle4"] == $_GET["cycle1"]) or ($_GET["cycle2"] == $_GET["cycle3"] and $_GET["cycle2"] == $_GET["cycle4"]) or ($_GET["cycle5"] == $_GET["cycle1"] and $_GET["cycle5"] == $_GET["cycle2"])) {
-    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 10; // 3x gleich, 2x verschieden
+    $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 15; // 3x gleich, 2x verschieden
     if ($radiance) {
-      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 10;
+      $radcyclecost = $radcycle1 + $radcycle2 + $radcycle3 + $radcycle4 + $radcycle5 + 15;
     }
   } elseif (($_GET["cycle1"] == $_GET["cycle2"]) or ($_GET["cycle2"] == $_GET["cycle3"]) or ($_GET["cycle3"] == $_GET["cycle4"]) or ($_GET["cycle4"] == $_GET["cycle5"]) or ($_GET["cycle5"] == $_GET["cycle1"])) {
     $cyclecost = $cycle1 + $cycle2 + $cycle3 + $cycle4 + $cycle5 + 5; // 2x gleich, 3x verschieden
@@ -384,9 +399,9 @@ if ($cyclen == 2) {
     }
   }
 }
-
+ 
 // echo "[Debug]<br>".$cyclecost."<br>".$radcyclecost."<br>";
-
+ 
 if ($_GET["transcendence"] == "checked") {
   $cyclecost *= 0.7;
   $radcyclecost *= 0.7;
@@ -406,17 +421,17 @@ if (mr > 0 and ms > 0) {
 } else {
   $radmgps = $mgps;
 }
-
+ 
 $avgradccps = (8*$radccps + 7*$ccps)/15;
 $avgradmgps = (8*$radmgps + 7*$mgps)/15;
-
+ 
 // echo "[Debug] Cycle length: ".$cyclen." spells.<br>";
 // echo "[Debug] Cycle cost: ".$cyclecost." mana.<br>";
 // echo "[Debug] Total clicks: ".$totalclicks.".<br>";
 // echo "[Debug] Cyclepercentage: ".$cyclepercentage.".<br>";
-
+ 
 ?>
-
+ 
 <table class='mana'>
   <tr>
     <th>Mana calculation:</th>
@@ -470,9 +485,9 @@ if ($_GET["radiance"] == "checked") {
       </tr>";
 }
 ?>
-
+ 
 </span>
-
+ 
 <?php
 // echo "<script>
 // const coll = document.getElementsByClassName('collapsible');
@@ -489,17 +504,17 @@ if ($_GET["radiance"] == "checked") {
 //   });
 // }
 // </script>";
-
+ 
 // if ($_GET["radiance"] == "checked") {
 //   echo "Radiance on";
 //   echo "<script>
 //   "
 // }
 ?>
-
+ 
 <script>
 const coll = document.getElementsByClassName("collapsible");
-
+ 
 for (let i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
@@ -512,8 +527,8 @@ for (let i = 0; i < coll.length; i++) {
     }
   });
 }
-
-
+ 
+ 
 // const coll = document.getElementsByClassName("collapsible");
 //
 // for (let i = 0; i < coll.length; i++) {
@@ -528,7 +543,7 @@ for (let i = 0; i < coll.length; i++) {
 //   });
 // }
 </script>
-
+ 
 <script>
 // const coll = document.getElementsByClassName("submitbutton");
 //
@@ -544,7 +559,7 @@ for (let i = 0; i < coll.length; i++) {
 //   });
 // }
 </script>
-
+ 
 <div class="credits">Made by Ingo#5621 with help from Phanta#1328</div>
 </body>
 </html>
