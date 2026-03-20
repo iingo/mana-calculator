@@ -4,4 +4,4 @@
 
 # https://wynnmana.github.io/
 
-GitHub Repo: https://github.com/wynnmana
+GitHub Repo: https://github.com/wynnmana/wynnmana.github.io
